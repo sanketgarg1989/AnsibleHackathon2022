@@ -1,0 +1,42 @@
+--- 
+- 
+  become: true
+  hosts: node1
+  name: "NTP Server Configuration"
+  tasks: 
+    - 
+      name: "Install latest package of firewalld"
+      yum: 
+        name: firewalld
+        state: latest
+    - 
+      name: "Start & Enable the firewalld service"
+      service: 
+        enabled: true
+        name: firewalld
+        state: started
+    - 
+      name: "configure ntp server/client using chrony"
+      shell: "firewall-cmd --add-service=ntp --permanent"
+    - 
+      name: "firewall reload"
+      shell: "firewall-cmd --reload"
+    - 
+      name: "Make sure Chrony is started up"
+      service: "name=chronyd state=started enabled=yes"
+      tags: chrony
+    - 
+      name: make sure chronyd is installed
+      yum:
+       name: chrony
+       state: latest
+       update_cache: yes
+    - 
+      copy: "src=/etc/chrony.conf dest=/etc/chrony.conf"
+      name: "Copy over the NTP configuration"
+      tags: ntp
+    - 
+     name: Restart chronyd
+     service:
+      name: chronyd
+      state: restarted
