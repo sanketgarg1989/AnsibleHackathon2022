@@ -1,6 +1,5 @@
 --- 
 - 
-  become: true
   hosts: node1
   name: "Install Wget and NGINX"
   tasks: 
