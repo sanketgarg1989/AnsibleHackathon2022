@@ -1,6 +1,5 @@
 --- 
 - 
-  become: true
   hosts: node1
   name: "NTP Server Configuration"
   tasks: 
