@@ -1,0 +1,6 @@
+---
+ - name: This playbook is created to create user and sample file.
+   hosts: node1
+   tasks:
+   - name: This is creating an empty file
+     file: path=demonew.txt state=touch
