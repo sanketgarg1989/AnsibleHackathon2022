@@ -1,0 +1,17 @@
+---
+ - name: This playbook is created to create user and sample file.
+   hosts: node1
+   tasks:
+   - name: Create the user
+     ansible.builtin.user:
+       name: tempuser
+       uid: 1077
+       group: sudo
+       createhome: yes
+       home: /home/tempuser
+   - name: This is creating an empty file
+     file: 
+      path: /etc/demonew.txt 
+      state: touch 
+      mode: u=rwx,g=rx,o=rx
+      owner: tempuser
