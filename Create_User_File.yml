@@ -6,7 +6,6 @@
      ansible.builtin.user:
        name: tempuser
        uid: 1077
-       group: sudo
        createhome: yes
        home: /home/tempuser
    - name: This is creating an empty file
