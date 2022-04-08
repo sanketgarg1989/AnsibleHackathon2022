@@ -2,22 +2,22 @@
 - name: This sets up an snmpd 
   hosts: all
   tasks:
-- name: Install net-snmp packages 
-  yum:
-      name: net-snmp
-      state: present
-- name: ensure net-snmp is running
-  service:
-      name: net-snmp
-      state: started
-- name: Uninstall ypbindp packages 
-  yum:
-       name: ypbind
-       state: absent
-- name : Check File
-  file: path=/etc/rsyslog.conf state=file
-- name : Create a File with Content
-  copy:
+     - name: Install net-snmp packages 
+       yum:
+         name: net-snmp
+         state: present
+     - name: ensure net-snmp is running
+       service:
+         name: net-snmp
+         state: started
+     - name: Uninstall ypbindp packages 
+       yum:
+         name: ypbind
+         state: absent
+     - name : Check File
+       file: path=/etc/rsyslog.conf state=file
+     - name : Create a File with Content
+       copy:
           dest: /etc/rsyslog.conf
           content: |
             # mail logging additions to meet CIS standards
@@ -29,8 +29,8 @@
             -/var/log/mail.warning
             mail.err
             /var/log/mail.err
-- name: This is to change permission
-  file: 
-     path: /var/log/* 
-     mode: u=rwx,g=rx,o=rx
+     - name: This is to change permission
+       file: 
+         path: /var/log/* 
+         mode: u=rwx,g=rx,o=rx
   
